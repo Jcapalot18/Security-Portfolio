@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Portfolio | Cybersecurity Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .project-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .features li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #00ff88;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tech-stack {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tech-stack h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Security Portfolio</h1>
+            <p class="subtitle">Advanced Cybersecurity Platform Prototypes</p>
+        </header>
+        
+        <div class="projects">
+            <!-- CyberShield -->
+            <div class="project-card">
+                <div class="project-icon">🛡️</div>
+                <h3 class="project-title">CyberShield</h3>
+                <p class="project-description">
+                    Security monitoring platform with real device scanning and system analytics using 15+ browser APIs.
+                </p>
+                <ul class="features">
+                    <li>Real Bluetooth device scanning</li>
+                    <li>USB device detection</li>
+                    <li>Battery & system monitoring</li>
+                    <li>GPS location tracking</li>
+                    <li>15 complete pages</li>
+                </ul>
+                <a href="CyberShield-Security-Platform.html" class="btn">Open CyberShield</a>
+            </div>
+            
+            <!-- CipherForge -->
+            <div class="project-card">
+                <div class="project-icon">🔐</div>
+                <h3 class="project-title">CipherForge</h3>
+                <p class="project-description">
+                    Professional cryptography suite with real AES-256, RSA-2048 encryption and file encryption capabilities.
+                </p>
+                <ul class="features">
+                    <li>Real AES-256-GCM encryption</li>
+                    <li>RSA-2048 key generation</li>
+                    <li>File encryption/decryption</li>
+                    <li>Digital signatures</li>
+                    <li>15 complete pages</li>
+                </ul>
+                <a href="CipherForge-Cryptography-Suite.html" class="btn">Open CipherForge</a>
+            </div>
+            
+            <!-- NetGuardian -->
+            <div class="project-card">
+                <div class="project-icon">🌐</div>
+                <h3 class="project-title">NetGuardian</h3>
+                <p class="project-description">
+                    Network security suite with traffic monitoring, DNS leak detection, and comprehensive privacy tools.
+                </p>
+                <ul class="features">
+                    <li>Real-time traffic monitoring</li>
+                    <li>WebRTC leak detection</li>
+                    <li>VPN manager interface</li>
+                    <li>Network diagnostics</li>
+                    <li>12 complete pages</li>
+                </ul>
+                <a href="NetGuardian-Network-Security.html" class="btn">Open NetGuardian</a>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2>🛠️ Technologies Used</h2>
+            <div class="tech-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript ES6+</span>
+                <span class="tag">Web Bluetooth API</span>
+                <span class="tag">WebUSB API</span>
+                <span class="tag">Web Crypto API</span>
+                <span class="tag">AES-256-GCM</span>
+                <span class="tag">RSA-2048</span>
+                <span class="tag">WebRTC</span>
+                <span class="tag">Geolocation API</span>
+                <span class="tag">Network Information API</span>
+                <span class="tag">Performance API</span>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 Security Portfolio | All projects use real browser APIs</p>
+        </footer>
+    </div>
+</body>
+</html>
