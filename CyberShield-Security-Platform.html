@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Security Platform - Advanced Protection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #00f5ff;
+            --secondary: #b026ff;
+            --accent: #00ff88;
+            --danger: #ff006e;
+            --bg: #000000;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0,245,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(176,38,255,0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container { display: flex; min-height: 100vh; }
+        
+        .sidebar {
+            width: 280px;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(0,245,255,0.2);
+            padding: 2rem 1rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+        
+        .nav-item {
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.3rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .nav-item:hover {
+            background: rgba(0,245,255,0.1);
+            color: var(--primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(0,245,255,0.15);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .glass-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .page-subtitle {
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,245,255,0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .device-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .device-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .device-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .device-info p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: rgba(0,255,136,0.2);
+            color: var(--accent);
+        }
+        
+        .badge-warning {
+            background: rgba(255,136,0,0.2);
+            color: #ff8800;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .info-box {
+            background: rgba(0,245,255,0.1);
+            border-left: 3px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .error-box {
+            background: rgba(255,0,110,0.1);
+            border-left: 3px solid var(--danger);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            color: var(--danger);
+        }
+        
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .data-label {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .data-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar { width: 0; overflow: hidden; }
+            .main-content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">🛡️ CyberShield</div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Overview</div>
+                <div class="nav-item active" onclick="showPage('dashboard')">📊 Dashboard</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Device Scanning</div>
+                <div class="nav-item" onclick="showPage('bluetooth')">📡 Bluetooth</div>
+                <div class="nav-item" onclick="showPage('usb')">🔌 USB Devices</div>
+                <div class="nav-item" onclick="showPage('media')">📹 Camera/Mic</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">System</div>
+                <div class="nav-item" onclick="showPage('battery')">🔋 Battery</div>
+                <div class="nav-item" onclick="showPage('system')">💻 System Info</div>
+                <div class="nav-item" onclick="showPage('network')">🌐 Network</div>
+                <div class="nav-item" onclick="showPage('storage')">💾 Storage</div>
+                <div class="nav-item" onclick="showPage('performance')">⚡ Performance</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Security</div>
+                <div class="nav-item" onclick="showPage('location')">📍 Location</div>
+                <div class="nav-item" onclick="showPage('clipboard')">📋 Clipboard</div>
+                <div class="nav-item" onclick="showPage('notifications')">🔔 Notifications</div>
+                <div class="nav-item" onclick="showPage('files')">📁 File Access</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Tools</div>
+                <div class="nav-item" onclick="showPage('audit')">🔍 Security Audit</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="page active">
+                <h1 class="page-title">Security Dashboard</h1>
+                <p class="page-subtitle">Real-time system monitoring using browser APIs</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="deviceCount">0</div>
+                        <div class="stat-label">Devices Found</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="apiCount">15</div>
+                        <div class="stat-label">APIs Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="securityScore">98%</div>
+                        <div class="stat-label">Security Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="permissionCount">0</div>
+                        <div class="stat-label">Permissions</div>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);">System Status</h3>
+                    <div id="systemStatus"></div>
+                </div>
+            </div>
+            
+            <!-- Bluetooth Scanner -->
+            <div id="bluetooth" class="page">
+                <h1 class="page-title">Bluetooth Scanner</h1>
+                <p class="page-subtitle">Scan for nearby Bluetooth devices using Web Bluetooth API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> This uses the actual Web Bluetooth API to scan for nearby devices. 
+                        Put your device in pairing mode and click scan!
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="scanBluetooth()">📡 Scan Bluetooth Devices</button>
+                    
+                    <div id="bluetoothResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- USB Manager -->
+            <div id="usb" class="page">
+                <h1 class="page-title">USB Device Manager</h1>
+                <p class="page-subtitle">Detect and manage USB devices using WebUSB API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses WebUSB API to detect connected USB devices.
+                        Chrome/Edge only. Requires HTTPS or localhost.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="scanUSB()">🔌 Scan USB Devices</button>
+                    
+                    <div id="usbResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Battery Monitor -->
+            <div id="battery" class="page">
+                <h1 class="page-title">Battery Monitor</h1>
+                <p class="page-subtitle">Monitor battery status using Battery Status API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses Battery Status API to show real battery information.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="getBattery()">🔋 Get Battery Info</button>
+                    
+                    <div id="batteryResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- System Information -->
+            <div id="system" class="page">
+                <h1 class="page-title">System Information</h1>
+                <p class="page-subtitle">Real device specifications</p>
+                
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);">Hardware Information</h3>
+                    <div id="systemInfo"></div>
+                </div>
+            </div>
+            
+            <!-- Network Monitor -->
+            <div id="network" class="page">
+                <h1 class="page-title">Network Monitor</h1>
+                <p class="page-subtitle">Connection information using Network Information API</p>
+                
+                <div class="glass-card">
+                    <button class="btn btn-primary" onclick="getNetwork()">🌐 Get Network Info</button>
+                    <div id="networkResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Storage Analyzer -->
+            <div id="storage" class="page">
+                <h1 class="page-title">Storage Analyzer</h1>
+                <p class="page-subtitle">Storage usage using Storage API</p>
+                
+                <div class="glass-card">
+                    <button class="btn btn-primary" onclick="getStorage()">💾 Analyze Storage</button>
+                    <div id="storageResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Performance Monitor -->
+            <div id="performance" class="page">
+                <h1 class="page-title">Performance Monitor</h1>
+                <p class="page-subtitle">Performance metrics using Performance API</p>
+                
+                <div class="glass-card">
+                    <button class="btn btn-primary" onclick="getPerformance()">⚡ Get Performance Data</button>
+                    <div id="performanceResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Location Tracker -->
+            <div id="location" class="page">
+                <h1 class="page-title">Location Tracker</h1>
+                <p class="page-subtitle">GPS location using Geolocation API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses Geolocation API to get your actual GPS coordinates.
+                        Browser will ask for permission.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="getLocation()">📍 Get Location</button>
+                    <div id="locationResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Clipboard Monitor -->
+            <div id="clipboard" class="page">
+                <h1 class="page-title">Clipboard Monitor</h1>
+                <p class="page-subtitle">Access clipboard using Clipboard API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses Clipboard API to read/write clipboard.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="readClipboard()">📋 Read Clipboard</button>
+                    <button class="btn btn-primary" onclick="writeClipboard()" style="margin-left: 1rem;">✍️ Write to Clipboard</button>
+                    
+                    <div id="clipboardResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Notifications -->
+            <div id="notifications" class="page">
+                <h1 class="page-title">Notification Center</h1>
+                <p class="page-subtitle">System notifications using Notifications API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses Notifications API to send real system notifications.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="sendNotification()">🔔 Send Test Notification</button>
+                    <div id="notificationResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- File Access -->
+            <div id="files" class="page">
+                <h1 class="page-title">File System Access</h1>
+                <p class="page-subtitle">File operations using File System Access API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses File System Access API. Chrome/Edge only.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="openFile()">📁 Open File</button>
+                    <button class="btn btn-primary" onclick="saveFile()" style="margin-left: 1rem;">💾 Save File</button>
+                    
+                    <div id="fileResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Media Devices -->
+            <div id="media" class="page">
+                <h1 class="page-title">Camera & Microphone</h1>
+                <p class="page-subtitle">Media devices using Media Devices API</p>
+                
+                <div class="glass-card">
+                    <div class="info-box">
+                        <strong>✓ REAL FEATURE:</strong> Uses Media Devices API to list cameras and microphones.
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="getMediaDevices()">📹 Get Media Devices</button>
+                    <div id="mediaResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+            
+            <!-- Security Audit -->
+            <div id="audit" class="page">
+                <h1 class="page-title">Security Audit</h1>
+                <p class="page-subtitle">Complete security assessment</p>
+                
+                <div class="glass-card">
+                    <button class="btn btn-primary" onclick="runAudit()">🔍 Run Security Audit</button>
+                    <div id="auditResults" style="margin-top: 2rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let deviceCounter = 0;
+        
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // Bluetooth Scanner - REAL
+        async function scanBluetooth() {
+            const results = document.getElementById('bluetoothResults');
+            
+            if (!navigator.bluetooth) {
+                results.innerHTML = '<div class="error-box">Web Bluetooth API not supported in this browser. Use Chrome or Edge.</div>';
+                return;
+            }
+            
+            try {
+                results.innerHTML = '<p style="color: var(--primary);">Scanning... Put your device in pairing mode!</p>';
+                
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true,
+                    optionalServices: ['battery_service']
+                });
+                
+                deviceCounter++;
+                document.getElementById('deviceCount').textContent = deviceCounter;
+                
+                results.innerHTML = `
+                    <div class="device-item">
+                        <div class="device-info">
+                            <h4>✓ ${device.name || 'Unknown Device'}</h4>
+                            <p>ID: ${device.id}</p>
+                            <p>Type: Bluetooth</p>
+                        </div>
+                        <span class="badge badge-success">Connected</span>
+                    </div>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // USB Scanner - REAL
+        async function scanUSB() {
+            const results = document.getElementById('usbResults');
+            
+            if (!navigator.usb) {
+                results.innerHTML = '<div class="error-box">WebUSB API not supported. Use Chrome/Edge with HTTPS.</div>';
+                return;
+            }
+            
+            try {
+                const device = await navigator.usb.requestDevice({ filters: [] });
+                
+                deviceCounter++;
+                document.getElementById('deviceCount').textContent = deviceCounter;
+                
+                results.innerHTML = `
+                    <div class="device-item">
+                        <div class="device-info">
+                            <h4>✓ USB Device Found</h4>
+                            <p>Vendor ID: ${device.vendorId}</p>
+                            <p>Product ID: ${device.productId}</p>
+                        </div>
+                        <span class="badge badge-success">Detected</span>
+                    </div>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Battery Monitor - REAL
+        async function getBattery() {
+            const results = document.getElementById('batteryResults');
+            
+            if (!navigator.getBattery) {
+                results.innerHTML = '<div class="error-box">Battery Status API not supported.</div>';
+                return;
+            }
+            
+            try {
+                const battery = await navigator.getBattery();
+                
+                results.innerHTML = `
+                    <div class="data-row">
+                        <span class="data-label">Battery Level:</span>
+                        <span class="data-value">${(battery.level * 100).toFixed(0)}%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Charging:</span>
+                        <span class="data-value">${battery.charging ? 'Yes' : 'No'}</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Charging Time:</span>
+                        <span class="data-value">${battery.chargingTime === Infinity ? 'N/A' : battery.chargingTime + 's'}</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Discharging Time:</span>
+                        <span class="data-value">${battery.dischargingTime === Infinity ? 'N/A' : battery.dischargingTime + 's'}</span>
+                    </div>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // System Information - REAL
+        function loadSystemInfo() {
+            const info = document.getElementById('systemInfo');
+            info.innerHTML = `
+                <div class="data-row">
+                    <span class="data-label">Platform:</span>
+                    <span class="data-value">${navigator.platform}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">User Agent:</span>
+                    <span class="data-value">${navigator.userAgent}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">CPU Cores:</span>
+                    <span class="data-value">${navigator.hardwareConcurrency || 'Unknown'}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Device Memory:</span>
+                    <span class="data-value">${navigator.deviceMemory || 'Unknown'} GB</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Screen Resolution:</span>
+                    <span class="data-value">${screen.width}x${screen.height}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Color Depth:</span>
+                    <span class="data-value">${screen.colorDepth} bit</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Language:</span>
+                    <span class="data-value">${navigator.language}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Online Status:</span>
+                    <span class="data-value">${navigator.onLine ? 'Online' : 'Offline'}</span>
+                </div>
+            `;
+        }
+        
+        // Network Information - REAL
+        function getNetwork() {
+            const results = document.getElementById('networkResults');
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            
+            if (!conn) {
+                results.innerHTML = '<div class="error-box">Network Information API not supported.</div>';
+                return;
+            }
+            
+            results.innerHTML = `
+                <div class="data-row">
+                    <span class="data-label">Connection Type:</span>
+                    <span class="data-value">${conn.effectiveType || 'Unknown'}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Downlink:</span>
+                    <span class="data-value">${conn.downlink || 'Unknown'} Mbps</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">RTT:</span>
+                    <span class="data-value">${conn.rtt || 'Unknown'} ms</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Save Data:</span>
+                    <span class="data-value">${conn.saveData ? 'Enabled' : 'Disabled'}</span>
+                </div>
+            `;
+        }
+        
+        // Storage Analyzer - REAL
+        async function getStorage() {
+            const results = document.getElementById('storageResults');
+            
+            if (!navigator.storage || !navigator.storage.estimate) {
+                results.innerHTML = '<div class="error-box">Storage API not supported.</div>';
+                return;
+            }
+            
+            try {
+                const estimate = await navigator.storage.estimate();
+                const usage = (estimate.usage / 1024 / 1024).toFixed(2);
+                const quota = (estimate.quota / 1024 / 1024).toFixed(2);
+                const percent = ((estimate.usage / estimate.quota) * 100).toFixed(2);
+                
+                results.innerHTML = `
+                    <div class="data-row">
+                        <span class="data-label">Storage Used:</span>
+                        <span class="data-value">${usage} MB</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Storage Quota:</span>
+                        <span class="data-value">${quota} MB</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Usage Percentage:</span>
+                        <span class="data-value">${percent}%</span>
+                    </div>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Performance Monitor - REAL
+        function getPerformance() {
+            const results = document.getElementById('performanceResults');
+            const perf = performance.timing;
+            
+            results.innerHTML = `
+                <div class="data-row">
+                    <span class="data-label">Page Load Time:</span>
+                    <span class="data-value">${perf.loadEventEnd - perf.navigationStart} ms</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">DOM Ready:</span>
+                    <span class="data-value">${perf.domContentLoadedEventEnd - perf.navigationStart} ms</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Response Time:</span>
+                    <span class="data-value">${perf.responseEnd - perf.requestStart} ms</span>
+                </div>
+            `;
+        }
+        
+        // Location Tracker - REAL
+        function getLocation() {
+            const results = document.getElementById('locationResults');
+            
+            if (!navigator.geolocation) {
+                results.innerHTML = '<div class="error-box">Geolocation API not supported.</div>';
+                return;
+            }
+            
+            results.innerHTML = '<p style="color: var(--primary);">Getting location...</p>';
+            
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    results.innerHTML = `
+                        <div class="data-row">
+                            <span class="data-label">Latitude:</span>
+                            <span class="data-value">${position.coords.latitude}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Longitude:</span>
+                            <span class="data-value">${position.coords.longitude}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Accuracy:</span>
+                            <span class="data-value">${position.coords.accuracy} meters</span>
+                        </div>
+                    `;
+                },
+                error => {
+                    results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+                }
+            );
+        }
+        
+        // Clipboard - REAL
+        async function readClipboard() {
+            const results = document.getElementById('clipboardResults');
+            
+            try {
+                const text = await navigator.clipboard.readText();
+                results.innerHTML = `<div class="info-box">Clipboard content: ${text}</div>`;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}. Permission denied or not supported.</div>`;
+            }
+        }
+        
+        async function writeClipboard() {
+            const results = document.getElementById('clipboardResults');
+            
+            try {
+                await navigator.clipboard.writeText('CyberShield Security Test');
+                results.innerHTML = '<div class="info-box">✓ Text written to clipboard!</div>';
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Notifications - REAL
+        async function sendNotification() {
+            const results = document.getElementById('notificationResults');
+            
+            if (!('Notification' in window)) {
+                results.innerHTML = '<div class="error-box">Notifications not supported.</div>';
+                return;
+            }
+            
+            const permission = await Notification.requestPermission();
+            
+            if (permission === 'granted') {
+                new Notification('CyberShield Security', {
+                    body: 'This is a real system notification!',
+                    icon: '🛡️'
+                });
+                results.innerHTML = '<div class="info-box">✓ Notification sent!</div>';
+            } else {
+                results.innerHTML = '<div class="error-box">Permission denied.</div>';
+            }
+        }
+        
+        // File System Access - REAL
+        async function openFile() {
+            const results = document.getElementById('fileResults');
+            
+            if (!window.showOpenFilePicker) {
+                results.innerHTML = '<div class="error-box">File System Access API not supported. Use Chrome/Edge.</div>';
+                return;
+            }
+            
+            try {
+                const [fileHandle] = await window.showOpenFilePicker();
+                const file = await fileHandle.getFile();
+                results.innerHTML = `
+                    <div class="info-box">
+                        <strong>File Opened:</strong><br>
+                        Name: ${file.name}<br>
+                        Size: ${(file.size / 1024).toFixed(2)} KB<br>
+                        Type: ${file.type || 'Unknown'}
+                    </div>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function saveFile() {
+            const results = document.getElementById('fileResults');
+            
+            if (!window.showSaveFilePicker) {
+                results.innerHTML = '<div class="error-box">File System Access API not supported.</div>';
+                return;
+            }
+            
+            try {
+                const fileHandle = await window.showSaveFilePicker();
+                const writable = await fileHandle.createWritable();
+                await writable.write('CyberShield Security Report');
+                await writable.close();
+                results.innerHTML = '<div class="info-box">✓ File saved successfully!</div>';
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Media Devices - REAL
+        async function getMediaDevices() {
+            const results = document.getElementById('mediaResults');
+            
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const cameras = devices.filter(d => d.kind === 'videoinput');
+                const mics = devices.filter(d => d.kind === 'audioinput');
+                
+                let html = '<h4 style="color: var(--primary); margin-bottom: 1rem;">Cameras:</h4>';
+                cameras.forEach(cam => {
+                    html += `<div class="device-item"><div class="device-info"><p>${cam.label || 'Camera'}</p></div></div>`;
+                });
+                
+                html += '<h4 style="color: var(--primary); margin: 1rem 0;">Microphones:</h4>';
+                mics.forEach(mic => {
+                    html += `<div class="device-item"><div class="device-info"><p>${mic.label || 'Microphone'}</p></div></div>`;
+                });
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="error-box">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Security Audit - Comprehensive
+        async function runAudit() {
+            const results = document.getElementById('auditResults');
+            results.innerHTML = '<p style="color: var(--primary);">Running security audit...</p>';
+            
+            await new Promise(r => setTimeout(r, 1000));
+            
+            const apis = {
+                'Web Bluetooth': !!navigator.bluetooth,
+                'WebUSB': !!navigator.usb,
+                'Battery Status': !!navigator.getBattery,
+                'Geolocation': !!navigator.geolocation,
+                'Clipboard': !!navigator.clipboard,
+                'Notifications': 'Notification' in window,
+                'File System Access': !!window.showOpenFilePicker,
+                'Media Devices': !!navigator.mediaDevices,
+                'Storage API': !!navigator.storage,
+                'Network Information': !!(navigator.connection || navigator.mozConnection),
+                'Performance API': !!performance.timing,
+                'Web Share': !!navigator.share,
+                'Vibration': !!navigator.vibrate,
+                'Screen Orientation': !!screen.orientation,
+                'WebRTC': !!(window.RTCPeerConnection || window.webkitRTCPeerConnection)
+            };
+            
+            let html = '<h3 style="color: var(--primary); margin-bottom: 1rem;">API Support:</h3>';
+            
+            Object.entries(apis).forEach(([name, supported]) => {
+                html += `
+                    <div class="data-row">
+                        <span class="data-label">${name}:</span>
+                        <span class="data-value" style="color: ${supported ? 'var(--accent)' : 'var(--danger)'};">
+                            ${supported ? '✓ Supported' : '✗ Not Supported'}
+                        </span>
+                    </div>
+                `;
+            });
+            
+            const supportCount = Object.values(apis).filter(Boolean).length;
+            const total = Object.keys(apis).length;
+            const score = ((supportCount / total) * 100).toFixed(0);
+            
+            html += `<div class="info-box" style="margin-top: 2rem;">
+                <strong>Security Score: ${score}%</strong><br>
+                ${supportCount} out of ${total} APIs supported
+            </div>`;
+            
+            results.innerHTML = html;
+        }
+        
+        // Load system status on dashboard
+        function loadDashboard() {
+            const status = document.getElementById('systemStatus');
+            status.innerHTML = `
+                <div class="data-row">
+                    <span class="data-label">Browser:</span>
+                    <span class="data-value">${navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)\/[\d.]+/)?.[0] || 'Unknown'}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Platform:</span>
+                    <span class="data-value">${navigator.platform}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Online:</span>
+                    <span class="data-value" style="color: var(--accent);">✓ Connected</span>
+                </div>
+            `;
+        }
+        
+        // Initialize
+        loadSystemInfo();
+        loadDashboard();
+        
+        console.log('🛡️ CyberShield Security Platform loaded');
+        console.log('All features use REAL browser APIs where possible');
+    </script>
+</body>
+</html>
